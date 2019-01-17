@@ -1,3 +1,8 @@
+<?php
+require "inc/connection.php";
+include("inc/functions.php");
+
+ ?>
 <!DOCTYPE html>
 <html>
     <head>
