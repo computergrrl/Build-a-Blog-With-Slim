@@ -8,6 +8,7 @@ use Slim\Http\Response;
 $app->get('/[{name}]', function (Request $request, Response $response, array $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
+    $args['db'] = $this->db;
 
     // Render index view
     return $this->renderer->render($response, 'index.php', $args);
