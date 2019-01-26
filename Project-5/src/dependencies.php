@@ -1,4 +1,7 @@
 <?php
+include('../models/data.php');
+
+
 // DIC configuration
 
 $container = $app->getContainer();
@@ -25,4 +28,8 @@ $container['db'] = function ($c) {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $pdo;
+};
+
+$container['data'] = function($c) {
+    return new Data($c->get('db'));
 };

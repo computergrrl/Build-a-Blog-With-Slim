@@ -7,7 +7,7 @@ return [
 
         'db' => [
         'driver' => 'sqlite',
-        'database' => __DIR__.' /../templates/inc/database.db',
+        'database' => __DIR__.' /../models/database.db',
         'prefix' => ''
       ],
         'renderer' => [
