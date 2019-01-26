@@ -12,7 +12,7 @@ class Data
 
   }
 
-  public function blogdata()
+  public function getData()
   {
     $data = $this->blogdb->prepare('SELECT * FROM blog');
     $data->execute();
@@ -21,5 +21,24 @@ class Data
 
   }
 
-   
+  public function listEntries()
+  {
+
+               foreach($this->getData() as $entry) {
+
+                 $getdate = $entry['Date'];
+                 $date = date("F d, Y", strtotime($getdate));
+                   echo '<h2><a href="detail.php?q=' .
+                   $entry["blogId"] . '">' .
+
+                   $entry['Title'] . '</a></h2>';
+
+                    echo '<time datetime="'  .
+                    $getdate . '">' .
+                     $date . '</time>';
+                }
+
+        return array();
+
+  }
 }
