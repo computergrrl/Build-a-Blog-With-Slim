@@ -12,7 +12,8 @@ $date = date("F d, Y", strtotime($getdate));
 
 $entry = $getdata[$id]['Entry'];
 
-var_dump($data->getComments());
+var_dump($data->getComments($id+1));
+
  ?>
 
 <!DOCTYPE html>
@@ -43,10 +44,11 @@ var_dump($data->getComments());
                 <div class="entry-list single">
                     <article>
                         <h1><?php echo $title; ?></h1>
-                        <time datetime="<?php echo $getdate .'">' . $date; ?></time>
+                        <time datetime="<?php echo $getdate;?>">
+                          <?php echo $date; ?></time>
                         <div class="entry">
                             <p><?php echo $entry ; ?></p>
-                            <p><a class="link" href="edit.spark">Edit Entry</a></p>
+                            <p><a class="link" href="/edit?q=">Edit Entry</a></p>
                         </div>
                     </article>
                 </div>
@@ -55,11 +57,13 @@ var_dump($data->getComments());
         <section class="entry-comments">
             <div class="container">
                     <h2>Comments</h2>
-                    <div class="comment">
+
+                    <?php $data->displayComments($id+1); ?>
+                    <!-- <div class="comment">
                         <strong>Carling Kirk</strong>
                         <time datetime="2016-01-31 1:00">January 31, 2016 at 1:00</time>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus pharetra massa libero, sed feugiat turpis efficitur at.</p>
-                    </div>
+                    </div> -->
                     <div class="new-comment">
                         <form>
                               <label for="name"> Name</label>
