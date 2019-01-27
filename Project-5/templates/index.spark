@@ -16,18 +16,30 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html">SparkBlog</a>
-                    <a class="new-entry button button-round" href="new.html"><i class="material-icons">create</i></a>
+                    <a class="logo" href="/">SparkBlog</a>
+                    <a class="new-entry button button-round" href="/new"><i class="material-icons">create</i></a>
                 </div>
             </div>
         </header>
         <section>
             <div class="container">
                 <div class="entry-list">
-                    <article>
 
-                      <?php $data->listEntries(); ?>
-              
+
+                  <?php foreach($data->listEntries() as $entry) {
+                    $getdate = $entry['Date'];
+                    $date = date("F d, Y", strtotime($getdate));
+
+                      echo '<article><h2><a href="/detail?q=' .
+                      $entry["BlogId"] . '">' ;
+
+                      echo $entry['Title'] . '</a></h2>';
+
+                      echo '<time datetime="'  . $getdate . '">';
+                      echo $date . '</time></article>';
+                   }
+                        ?>
+
                 </div>
             </div>
         </section>
