@@ -11,6 +11,19 @@ $app->get('/amber', function (Request $request, Response $response, array $args)
 
 });
 
+$app->get('/detail', function (Request $request, Response $response, array $args) {
+    // Sample log message
+    $this->logger->info("Amber was here '/detail' route");
+    $args['db'] = $this->db;
+    $args['data'] = $this->data;
+
+
+    // Render index view
+    return $this->renderer->render($response, 'detail.spark', $args);
+
+});
+
+
 $app->get('/', function (Request $request, Response $response, array $args) {
     // Sample log message
     $this->logger->info("Amber was here '/' route");
@@ -20,7 +33,6 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
     // Render index view
     return $this->renderer->render($response, 'index.spark', $args);
-
 
 });
 
