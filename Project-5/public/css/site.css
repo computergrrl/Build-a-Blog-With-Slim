@@ -140,6 +140,14 @@ a.link {
 .password h2 {
 	margin-bottom: 35px;
 }
+
+.error {
+	background-color: red;
+	width: 200px;
+	height: 40px;
+
+}
+
 .entry-list article {
 	margin-bottom: 70px;
 	text-align: center;
@@ -261,17 +269,3 @@ form textarea:hover {
 input[type=submit] {
 	margin-right: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

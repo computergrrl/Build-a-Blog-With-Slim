@@ -13,7 +13,11 @@ class Data
   }
 
 
-/*****************************************************************/
+  /******************************************************************
+                      BLOG  DATA AND ENTRIES
+  ******************************************************************/
+
+
   public function getData()
   {
     $data = $this->blogdb->prepare('SELECT * FROM blog');
@@ -81,7 +85,7 @@ class Data
         $sql->bindValue(3 , $entry, PDO::PARAM_STR);
         $sql->execute();
 
-      
+
     }
 
 /********************************************************************/
@@ -109,34 +113,5 @@ class Data
     ******************************************************************/
 
 
-
-  public function getComments($id = null)
-  {
-
-          $sql = $this->blogdb->prepare("SELECT * FROM comments WHERE BlogID = ?");
-          $sql->bindValue(1, $id, PDO::PARAM_INT);
-          $sql->execute();
-          $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-          return $results;
-
-
-
-  }
-
-/*********************************************************************/
-  public function displayComments($id = null)
-  {
-
-    foreach($this->getComments($id) as $comment) {
-    echo '<div class="comment">';
-    echo "<strong>" . $comment['name'] . "</strong>";
-    echo '<time datetime="' .$comment['date'] . '">' .$comment['date'] . "</time>";
-    echo '<p>' . $comment['comment'] . '</p></div>';
-
-    }
-    return true;
-  }
-
-/************************************************************************/
 
 }

@@ -30,12 +30,7 @@
                 <div class="entry-list single">
                     <article>
                       <?php
-                  /*Grab the correct details from the database */
-                      // $details = $data->displayDetails($id-1);
-                      //
-                      // echo "<h1>" .$details['title'] . "</h1>";
-                      // echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
-                      // echo '<div class="entry"><p>' .$details['entry'] . '</p>';
+
 
                         $details = $data->displayDetails($id);
 
@@ -59,10 +54,16 @@
             <div class="container">
                     <h2>Comments</h2>
 
-                    <?php $data->displayComments($id); ?>
+              <?php   foreach($comments->getComments($id) as $comment) {
+                echo '<div class="comment">';
+                echo "<strong>" . $comment['name'] . "</strong>";
+                echo '<time datetime="' .$comment['date'] . '">' .$comment['date'] . "</time>";
+                echo '<p>' . $comment['comment'] . '</p></div>';
+
+                } ?>
 
                     <div class="new-comment">
-                        <form>
+                        <form method="post">
                               <label for="name"> Name</label>
                               <input type="text" name="name"><br>
                               <label for="comment">Comment</label>

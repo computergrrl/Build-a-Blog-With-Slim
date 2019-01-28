@@ -1,5 +1,6 @@
 <?php
 include('../models/data.php');
+include('../models/comments.php');
 
 
 // DIC configuration
@@ -32,4 +33,8 @@ $container['db'] = function ($c) {
 
 $container['data'] = function($c) {
     return new Data($c->get('db'));
+};
+
+$container['comments'] = function($c) {
+    return new Comments($c->get('db'));
 };

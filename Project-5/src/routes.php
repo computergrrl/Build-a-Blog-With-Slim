@@ -20,14 +20,33 @@ $app->get('/test', function (Request $request, Response $response, array $args) 
 
 });
 
-$app->get('/detail', function (Request $request, Response $response, array $args) {
-
+$app->map(['GET', 'POST'], '/detail', function (Request $request, Response $response, array $args) {
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+    $args['comments'] = $this->comments;
     $args['blog'] = $this->data->getData();
     $args['id'] = $_GET['q'] ;
     $this->logger->info("Amber was here '/detail' route");
+
+    if($request->getMethod() == 'POST') {
+
+    $args = array_merge($args, $request->getParsedBody());
+
+      $id = $args['id'];
+      $name = $args['name'];
+
+      //if no name is entered, then the name "Anonymous" will be used
+          if(empty($name)) {
+            $name = "Anonymous";
+          }
+      $comment = $args['comment'];
+      $date = date("F d, Y h:i A");
+
+      if(!empty($comment)) {
+        $this->comments->newComment($id, $name, $comment, $date);
+      }
+  }
 
 
 
@@ -54,9 +73,16 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
           if(!empty($title) && !empty($date)
         && !empty($entry)) {
            $this->data->newEntry($title, $date, $entry);
-          
 
-                          }
+
+         } else {
+
+               $args['error'] =
+                "All fields required";
+
+
+
+          }
 
           }
 
