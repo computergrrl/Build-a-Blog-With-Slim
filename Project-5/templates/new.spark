@@ -1,7 +1,3 @@
-<?php
-
- ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +23,14 @@
             <div class="container">
                 <div class="new-entry">
                     <h2>Publish New Entry</h2>
+
+
+<!--  Show error message if any fields are left blank
+ (will be null and display nothing unless form is submitted with empty fields)  -->
+            <?php  echo $error;  ?>
                     <form method="post">
+
+
                         <label for="title">Title</label>
                         <input type="text" name="title"><br>
                         <label for="date">Date *</label>

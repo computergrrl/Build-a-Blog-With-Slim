@@ -59,6 +59,7 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+
     $this->logger->info("Amber was here '/new' route");
 
     if($request->getMethod() == 'POST') {
@@ -74,17 +75,14 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
         && !empty($entry)) {
            $this->data->newEntry($title, $date, $entry);
 
+         }  elseif(empty($_POST['title'] || $_POST['date'] ||
+                 $_POST['entry'])) {
 
-         } else {
+                   $args['error'] =
+                    '<span class="error">All fields required</span>';
+                 }
 
-               $args['error'] =
-                "All fields required";
-
-
-
-          }
-
-          }
+    }
 
     return $this->renderer->render($response, 'new.spark', $args);
 
