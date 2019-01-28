@@ -37,20 +37,32 @@ class Data
   }
 
 /******************************************************************/
-  public function displayDetails($id)
+  public function getDetails($id)
   {
 
-          $getdata = $this->getData();
-          $title = $getdata[$id]['Title'];
-          $getdate = $getdata[$id]['Date'];
+        $sql = $this->blogdb->prepare("SELECT * FROM blog WHERE BlogID = ?");
+        $sql->bindValue(1, $id , PDO::PARAM_INT);
+        $sql->execute();
+        $results = $sql->fetchALL(PDO::FETCH_ASSOC);
+        return $results;
+  }
+
+  public function displayDetails($id)
+  {
+          $data = $this->getDetails($id);
+          $getdata = $data[0];
+          $title = $getdata['Title'];
+          $getdate = $getdata['Date'];
           $date = date("F d, Y", strtotime($getdate));
-          $entry = $getdata[$id]['Entry'];
+          $entry = $getdata['Entry'];
 
 
         return array('title' => $title,
                      'getdate' => $getdate,
                      'date'=> $date,
                      'entry' => $entry);
+
+
 
   }
 
@@ -76,15 +88,16 @@ class Data
 
     public function editData($title, $entry, $id)
     {
-
-          $sql = $this->blogdb->prepare("UPDATE blog SET Title = ?, Entry = ?,
+          
+          $sql = $this->blogdb->prepare("UPDATE blog SET Title = ?, Entry = ?
               WHERE BlogID = ?");
 
-          $sql->bindValue(1, '$title' , PDO::PARAM_STR);
-          $sql->bindValue(2, '$entry' , PDO::PARAM_STR);
-          $sql->bindValue(3, '$id' , PDO::PARAM_INT);
+          $sql->bindValue(1, $title , PDO::PARAM_STR);
+          $sql->bindValue(2, $entry , PDO::PARAM_STR);
+          $sql->bindValue(3, $id , PDO::PARAM_INT);
           $sql->execute();
 
+          return true;
 
 
     }

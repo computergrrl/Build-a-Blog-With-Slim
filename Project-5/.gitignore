@@ -2,3 +2,4 @@
 /Files/
 /logs/*
 !/logs/README.md
+/templates/test.spark

@@ -31,7 +31,7 @@
                     $date = date("F d, Y", strtotime($getdate));
 
                       echo '<article><h2><a href="/detail?q=' .
-                      $entry["BlogId"] . '">' ;
+                      ($entry["BlogId"]) . '">' ;
 
                       echo $entry['Title'] . '</a></h2>';
 

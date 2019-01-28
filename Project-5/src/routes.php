@@ -8,9 +8,12 @@ use Slim\Http\Response;
 //$app->redirect('./');
 $app->get('/test', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info("Amber was here '/detail' route");
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+    $args['blog'] = $this->data->getData();
+    $args['id'] = $_GET['q'] ;
+    $this->logger->info("Amber was here '/detail' route");
+
 
     // Render index view
     return $this->renderer->render($response, 'test.spark', $args);
@@ -26,11 +29,12 @@ $app->get('/test', function (Request $request, Response $response, array $args) 
 
 $app->get('/detail', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info("Amber was here '/detail' route");
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
-
+    $args['blog'] = $this->data->getData();
+    $args['id'] = $_GET['q'] ;
+    $this->logger->info("Amber was here '/detail' route");
 
 
     // Render index view
@@ -40,10 +44,9 @@ $app->get('/detail', function (Request $request, Response $response, array $args
 
 $app->get('/new', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info("Amber was here '/new' route");
     $args['db'] = $this->db;
     $args['data'] = $this->data;
-
+    $this->logger->info("Amber was here '/new' route");
 
     // Render index view
     return $this->renderer->render($response, 'new.spark', $args);
@@ -52,15 +55,25 @@ $app->get('/new', function (Request $request, Response $response, array $args) {
 
 $app->map(['GET', 'POST'], '/edit', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info("Amber was here '/edit' route");
+
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+    $args['blog'] = $this->data->getData();
+    $args['id'] = $_GET['q'];
+    $this->logger->info("Amber was here '/edit' route");
+
 
     if($request->getMethod() == 'POST') {
 
           $args = array_merge($args, $request->getParsedBody());
-          if(!empty($args['title']) || !empty($args['entry'])) {
-            echo $args['title'];
+
+
+          $title = $args['title'];
+          $entry = $args['entry'] ;
+          $id = $args['id'];
+          if(!empty($args['title']) && !empty($args['entry'])) {
+           $this->data->editData($title, $entry, $id);
+
           }
 
           else {echo "These are empty!";}
@@ -75,9 +88,11 @@ $app->map(['GET', 'POST'], '/edit', function (Request $request, Response $respon
 
 $app->get('/', function (Request $request, Response $response, array $args) {
     // Sample log message
-    $this->logger->info("Amber was here '/' route");
+
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+    $args['blog'] = $this->data->getData();
+    $this->logger->info("Amber was here '/' route");
 
 
     // Render index view

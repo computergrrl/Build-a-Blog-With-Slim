@@ -1,7 +1,4 @@
 <?php
-//set variable equal to the blogID
-$id = filter_input(INPUT_GET, 'q' , FILTER_SANITIZE_NUMBER_INT);
-$id--;
 
  ?>
 
@@ -34,14 +31,25 @@ $id--;
                     <article>
                       <?php
                   /*Grab the correct details from the database */
-                      $details = $data->displayDetails($id);
+                      // $details = $data->displayDetails($id-1);
+                      //
+                      // echo "<h1>" .$details['title'] . "</h1>";
+                      // echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
+                      // echo '<div class="entry"><p>' .$details['entry'] . '</p>';
 
-                      echo "<h1>" .$details['title'] . "</h1>";
-                      echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
-                      echo '<div class="entry"><p>' .$details['entry'] . '</p>'; ?>
+                        $details = $data->displayDetails($id);
 
 
-                            <p><a class="link" href="/edit?q=">Edit Entry</a></p>
+
+
+                        echo "<h1>" . $details['title'] ."</h1>";
+                        echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
+                        echo '<div class="entry"><p>' .$details['entry'] . '</p>';
+
+                        ?>
+
+
+                            <p><a class="link" href="/edit?q=<?php echo $id;?>">Edit Entry</a></p>
                         </div>
                     </article>
                 </div>
@@ -51,7 +59,7 @@ $id--;
             <div class="container">
                     <h2>Comments</h2>
 
-                    <?php $data->displayComments($id+1); ?>
+                    <?php $data->displayComments($id); ?>
 
                     <div class="new-comment">
                         <form>
