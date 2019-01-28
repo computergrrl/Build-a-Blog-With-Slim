@@ -5,9 +5,9 @@ use Slim\Http\Response;
 
 // Routes
 
-//$app->redirect('./');
+
 $app->get('/test', function (Request $request, Response $response, array $args) {
-    // Sample log message
+
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
@@ -15,20 +15,13 @@ $app->get('/test', function (Request $request, Response $response, array $args) 
     $this->logger->info("Amber was here '/detail' route");
 
 
-    // Render index view
+
     return $this->renderer->render($response, 'test.spark', $args);
 
 });
-//**********Example from StackOverflow.com************
-// $app->post('/', function ($request, $response, $args) {
-//     $email = $request->getParam('Email');
-//     $subject = $request->getParam('Subject');
-//     echo "Email: $email<br/>";
-//     echo "Subject: $subject";
-// });
 
 $app->get('/detail', function (Request $request, Response $response, array $args) {
-    // Sample log message
+
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
@@ -37,24 +30,43 @@ $app->get('/detail', function (Request $request, Response $response, array $args
     $this->logger->info("Amber was here '/detail' route");
 
 
-    // Render index view
+
     return $this->renderer->render($response, 'detail.spark', $args);
 
 });
 
-$app->get('/new', function (Request $request, Response $response, array $args) {
-    // Sample log message
+$app->map(['GET', 'POST'], '/new', function (Request $request, Response $response, array $args) {
+
+
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $this->logger->info("Amber was here '/new' route");
 
-    // Render index view
+    if($request->getMethod() == 'POST') {
+
+    $args = array_merge($args, $request->getParsedBody());
+
+
+          $title = $args['title'];
+          $date = $args['date'];
+          $entry = $args['entry'] ;
+
+          if(!empty($title) && !empty($date)
+        && !empty($entry)) {
+           $this->data->newEntry($title, $date, $entry);
+          
+
+                          }
+
+          }
+
     return $this->renderer->render($response, 'new.spark', $args);
 
 });
 
+
 $app->map(['GET', 'POST'], '/edit', function (Request $request, Response $response, array $args) {
-    // Sample log message
+
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
@@ -80,14 +92,14 @@ $app->map(['GET', 'POST'], '/edit', function (Request $request, Response $respon
 
     }
 
-    // Render index view
+
     return $this->renderer->render($response, 'edit.spark', $args);
 
 });
 
 
-$app->get('/', function (Request $request, Response $response, array $args) {
-    // Sample log message
+$app->get('/pop', function (Request $request, Response $response, array $args) {
+
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
@@ -95,7 +107,22 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $this->logger->info("Amber was here '/' route");
 
 
-    // Render index view
+
+    return $this->renderer->render($response, 'population_arrays.php', $args);
+
+});
+
+
+$app->get('/', function (Request $request, Response $response, array $args) {
+
+
+    $args['db'] = $this->db;
+    $args['data'] = $this->data;
+    $args['blog'] = $this->data->getData();
+    $this->logger->info("Amber was here '/' route");
+
+
+
     return $this->renderer->render($response, 'index.spark', $args);
 
 });

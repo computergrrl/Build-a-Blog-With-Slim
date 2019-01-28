@@ -47,6 +47,7 @@ class Data
         return $results;
   }
 
+/***************************************************************/
   public function displayDetails($id)
   {
           $data = $this->getDetails($id);
@@ -69,18 +70,18 @@ class Data
 
 /********************************************************************/
 
-    public function displayEditPage()
+    public function newEntry($title, $date, $entry)
     {
 
-      // echo "<form method=\"post\">
-      //     <label for="title"> Title</label>
-      //     <input type="text" name="title"><br>
-      //     <label for="entry">Entry</label>
-      //     <textarea rows="5" name="entry"></textarea>
-      //     <input type="submit" value="Save Entry" class="button">
-      //     <a href="#" class="button button-secondary">Cancel</a>
-      // </form>
-      //
+        $sql = $this->blogdb->prepare("INSERT INTO blog (Title,
+          Date, Entry) VALUES (?, ?, ?)");
+
+        $sql->bindValue(1 , $title, PDO::PARAM_STR);
+        $sql->bindValue(2 , $date, PDO::PARAM_STR);
+        $sql->bindValue(3 , $entry, PDO::PARAM_STR);
+        $sql->execute();
+
+      
     }
 
 /********************************************************************/
@@ -88,7 +89,7 @@ class Data
 
     public function editData($title, $entry, $id)
     {
-          
+
           $sql = $this->blogdb->prepare("UPDATE blog SET Title = ?, Entry = ?
               WHERE BlogID = ?");
 
