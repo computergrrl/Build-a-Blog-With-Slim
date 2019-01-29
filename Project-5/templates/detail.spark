@@ -11,8 +11,8 @@
         <title>SparkBlog</title>
         <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Noto+Sans:700,400' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/site.css">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/site.css">
     </head>
     <body>
 
@@ -44,7 +44,7 @@
                         ?>
 
 
-                            <p><a class="link" href="/edit?q=<?php echo $q;?>">Edit Entry</a></p>
+                            <p><a class="link" href="/edit/<?php echo $q;?>">Edit Entry</a></p>
                         </div>
                     </article>
                 </div>
