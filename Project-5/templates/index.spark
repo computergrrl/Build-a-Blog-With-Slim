@@ -1,6 +1,3 @@
-<?php
-
- ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +27,7 @@
                     $getdate = $entry['Date'];
                     $date = date("F d, Y", strtotime($getdate));
 
-                      echo '<article><h2><a href="/detail?q=' .
+                      echo '<article><h2><a href="/detail/' .
                       ($entry["BlogId"]) . '">' ;
 
                       echo $entry['Title'] . '</a></h2>';

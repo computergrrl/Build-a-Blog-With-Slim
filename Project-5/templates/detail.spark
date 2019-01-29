@@ -32,7 +32,7 @@
                       <?php
 
 
-                        $details = $data->displayDetails($id);
+                        $details = $data->displayDetails($q);
 
 
 
@@ -44,7 +44,7 @@
                         ?>
 
 
-                            <p><a class="link" href="/edit?q=<?php echo $id;?>">Edit Entry</a></p>
+                            <p><a class="link" href="/edit?q=<?php echo $q;?>">Edit Entry</a></p>
                         </div>
                     </article>
                 </div>
@@ -54,7 +54,7 @@
             <div class="container">
                     <h2>Comments</h2>
 
-              <?php   foreach($comments->getComments($id) as $comment) {
+              <?php   foreach($comments->getComments($q) as $comment) {
                 echo '<div class="comment">';
                 echo "<strong>" . $comment['name'] . "</strong>";
                 echo '<time datetime="' .$comment['date'] . '">' .$comment['date'] . "</time>";
