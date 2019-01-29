@@ -20,6 +20,8 @@ class Data
 
   public function getData()
   {
+    /*gets all the data from the blog table and returns data as
+    an associative array  */
     $data = $this->blogdb->prepare('SELECT * FROM blog');
     $data->execute();
     $results = $data->fetchAll(PDO::FETCH_ASSOC);
@@ -30,7 +32,8 @@ class Data
 /*******************************************************************/
   public function listEntries()
   {
-
+/*gets all the data from the blog table and orders it by date.  Then returns
+that data as an associative array  */
     $data = $this->blogdb->prepare('SELECT * FROM blog ORDER BY DATE desc');
     $data->execute();
     $results = $data->fetchAll(PDO::FETCH_ASSOC);
@@ -41,6 +44,8 @@ class Data
   }
 
 /******************************************************************/
+
+//Gets the details for a specific blog entry
   public function getDetails($id)
   {
 
@@ -52,8 +57,12 @@ class Data
   }
 
 /***************************************************************/
+
+
   public function displayDetails($id)
   {
+    /*Calls the getDetails method and then uses that info to set variables
+    that will be used in HTML display */
           $data = $this->getDetails($id);
           $getdata = $data[0];
           $title = $getdata['Title'];
@@ -61,7 +70,8 @@ class Data
           $date = date("F d, Y", strtotime($getdate));
           $entry = $getdata['Entry'];
 
-
+/*returns the assigned variables as an associative array which can be used
+in HTML display  */
         return array('title' => $title,
                      'getdate' => $getdate,
                      'date'=> $date,
@@ -73,6 +83,8 @@ class Data
 
 
 /********************************************************************/
+
+//CRUD for adding new entry
 
     public function newEntry($title, $date, $entry)
     {
@@ -90,7 +102,7 @@ class Data
 
 /********************************************************************/
 
-
+//CRUD for editing an entry
     public function editData($title, $entry, $id)
     {
 
@@ -107,10 +119,6 @@ class Data
 
     }
 
-
-    /******************************************************************
-                             BLOG  COMMENTS
-    ******************************************************************/
 
 
 
