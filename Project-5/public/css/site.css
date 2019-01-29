@@ -4,26 +4,29 @@
    Global Styles
    ========================================================================== */
 body {
-	background: url(../../concepts/JavaTechdegree_SparkBlog_1.jg) top center no-repeat;
+
 	font-size: 15px;
-	color: #000;
+	color: #000080	;
 	font-family: 'Noto Serif', Georgia, serif;
-	background: #444;
+	background: #FFCC99;
+
 }
 .container {
 	margin: 0 auto;
 	padding: 0 25px;
-	background: #FFF;
+	background: #FFCC99;
+
 }
 header .site-header {
-	border-bottom: 1px solid #d1d1d1;
+
+	border-bottom: 1px solid #000080;
 	margin: 0 auto;
 	height: 95px;
 }
 header .logo {
-	border: 5px solid #000;
+	border: 5px solid #000080	;
 	text-decoration: none;
-	color: #000;
+	color: #000080	;
 	font-size: 21px;
 	font-weight: bold;
 	padding: 5px 10px;
@@ -37,14 +40,14 @@ header .new-entry {
 	margin: 25px 0 0 0;
 }
 footer {
-	background: #444;
+	background: #E8BC90;
 	height: 30px;
 	text-align: center;
 	padding: 35px 0;
-	color: #999;
+	color: #000;
 }
 footer a {
-	color: #999;
+	color: #000;
 	text-decoration: none;
 	border-bottom: 2px solid #666;
 	padding-bottom: 1px;
@@ -59,8 +62,8 @@ footer a {
 .button {
 	padding: 8px 12px 7px 12px;
 	text-transform: uppercase;
-	background: #000;
-	border: 3px solid #000;
+	background: #000080	;
+	border: 3px solid #000080	;
 	border-radius: 4px;
 	text-decoration: none;
 	color: #FFF;
@@ -70,8 +73,8 @@ footer a {
 }
 .button.button-secondary {
 	background: transparent;
-	border-color: #000;
-	color: #000;
+	border-color: #000080	;
+	color: #000080	;
 }
 .button.button-round {
 	border-radius: 100px;
@@ -162,10 +165,10 @@ a.link {
 }
 .entry-list article a {
 	text-decoration: none;
-	color: #000;
+	color: #000080	;
 }
 .entry-list time {
-	color: #888;
+	color: #478476;
 }
 .entry-list.single {
 	padding-bottom: 30px;
@@ -183,7 +186,7 @@ a.link {
 	margin-bottom: 40px;
 }
 .entry-comments {
-	background: #f1f1f1;
+	background: #FFCC99;
 	padding: 70px 0;
 }
 .entry-comments .container {
@@ -196,18 +199,18 @@ a.link {
 	margin: 0 auto;
 }
 .entry-comments h2 {
-	border-bottom: 1px solid #c1c1c1;
+	border-bottom: 1px solid #000080;
 	padding-bottom: 35px;
 }
 .comment {
-	border-top: 1px solid #c1c1c1;
-	border-bottom: 1px solid #c1c1c1;
+	border-top: 1px solid #000080;
+	border-bottom: 1px solid #000080;
 	padding: 35px 0 20px;
 	margin: 2px 0 0 0;
 }
 .comment time {
 	display: block;
-	color: #888;
+	color: #478476;
 	font-size: 14px;
 	margin: 3px 0 20px 0;
 }

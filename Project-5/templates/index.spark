@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +24,13 @@
                 <div class="entry-list">
 
 
-                  <?php foreach($data->listEntries() as $entry) {
+                  <?php
+
+/*Call to the listEntries method which will return an array of all entries
+from the blog table sorted by date desc. Then use foreach loop to
+ display the list entries (each entry displayed is a clickable link) */
+
+                  foreach($data->listEntries() as $entry) {
                     $getdate = $entry['Date'];
                     $date = date("F d, Y", strtotime($getdate));
 

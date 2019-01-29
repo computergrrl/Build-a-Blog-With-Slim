@@ -1,6 +1,3 @@
-<?php
-
- ?>
 
 <!DOCTYPE html>
 
@@ -29,32 +26,38 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
-                      <?php
+            <?php
+
+  /*Call the displayDetails method which returns an assoc. array of
+  values.  Assign that array to $details variable.*/
+                $details = $data->displayDetails($q);
 
 
-                        $details = $data->displayDetails($q);
+  /* Use keys from $details array to create html for details display */
 
+                echo "<h1>" . $details['title'] ."</h1>";
+                echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
+                echo '<div class="entry"><p>' .$details['entry'] . '</p>';
 
+                ?>
 
-
-                        echo "<h1>" . $details['title'] ."</h1>";
-                        echo '<time datetime="' .$details['getdate'] .'">' . $details['date'] . "</time>";
-                        echo '<div class="entry"><p>' .$details['entry'] . '</p>';
-
-                        ?>
-
-
-                            <p><a class="link" href="/edit/<?php echo $q;?>">Edit Entry</a></p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-        <section class="entry-comments">
-            <div class="container">
+                        <p><a class="link" href="/edit/<?php echo $q;?>">Edit Entry</a></p>
+                  </div>
+              </article>
+          </div>
+        </div>
+    </section>
+    <section class="entry-comments">
+        <div class="container">
                     <h2>Comments</h2>
 
-              <?php   foreach($comments->getComments($q) as $comment) {
+
+              <?php
+/* call the getComments method which will return an array
+of all the comments associated with this particular blog entry. Then use
+foreach loop to display them all  */
+
+               foreach($comments->getComments($q) as $comment) {
                 echo '<div class="comment">';
                 echo "<strong>" . $comment['name'] . "</strong>";
                 echo '<time datetime="' .$comment['date'] . '">' .$comment['date'] . "</time>";

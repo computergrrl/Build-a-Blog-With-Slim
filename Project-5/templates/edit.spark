@@ -1,4 +1,4 @@
-<?php  ?>
+<?php ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,12 +23,22 @@
           <div class="container">
               <div class="edit-entry">
                 <h2>Edit Entry</h2>
+
+<!--  Show error message if any fields are left blank
+ (will be null and display nothing unless form is submitted with empty fields)  -->
+                            <?php  echo $error;  ?>
                 <form method="post">
 
                     <label for="title"> Title</label>
                     <?php
 
+/*Call the displayDetails method which will get the details for this
+particular blog entry and returns the data as an assoc. array
+of values.  Assign that array to $details variable.*/
                       $details = $data->displayDetails($q);
+
+/* Use data from $details array to create html for edit display
+and also to insert the existing data into the form fields */
 
                       echo '<input type="text" name="title"
                       value="' . $details['title'] .'"><br>';?>

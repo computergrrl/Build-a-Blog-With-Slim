@@ -5,20 +5,6 @@ use Slim\Http\Response;
 
 // Routes
 
-
-// $app->get('/test', function (Request $request, Response $response, array $args) {
-//
-//     $args['db'] = $this->db;
-//     $args['data'] = $this->data;
-//     $args['blog'] = $this->data->getData();
-//     // $args['id'] = $_GET['q'] ;
-//     $this->logger->info("Amber was here '/detail' route");
-//
-//
-//
-//     return $this->renderer->render($response, 'test.spark', $args);
-//
-// });
 /**************DETAIL PAGE *****************************************/
 $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $response, array $args) {
 
@@ -27,7 +13,7 @@ $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $
     $args['data'] = $this->data;
     $args['comments'] = $this->comments;
     $args['blog'] = $this->data->getData();
-    $this->logger->info("Amber was here '/detail' route");
+
 
     if($request->getMethod() == 'POST') {
 
@@ -43,11 +29,12 @@ $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $
       $comment = $args['comment'];
       $date = date("F d, Y h:i A");
 
+      /*if form is posted and comment field has data in it then
+      call the newComment method */
       if(!empty($comment)) {
         $this->comments->newComment($id, $name, $comment, $date);
       }
   }
-
 
 
     return $this->renderer->render($response, 'detail.spark', $args);
@@ -62,7 +49,6 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
     $args['db'] = $this->db;
     $args['data'] = $this->data;
 
-    $this->logger->info("Amber was here '/new' route");
 
     if($request->getMethod() == 'POST') {
 
@@ -77,12 +63,21 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
         && !empty($entry)) {
            $this->data->newEntry($title, $date, $entry);
 
-         }  elseif(empty($_POST['title'] || $_POST['date'] ||
-                 $_POST['entry'])) {
+//After adding new entry redirect to home page
+return $response->withStatus(302)->withHeader('Location' , '/');
+
+
+/*if any of the fields are left blank then set the value of $args['error']
+so that it displays on the page  */
+
+}  elseif(empty($_POST['title']) || empty($_POST['date']) ||
+                 empty($_POST['entry'])) {
+
 
                    $args['error'] =
                     '<span class="error">All fields required</span>';
                  }
+
 
     }
 
@@ -98,7 +93,6 @@ $app->map(['GET', 'POST'], '/edit/{q}', function (Request $request, Response $re
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
-    $this->logger->info("Amber was here '/edit' route");
 
 
     if($request->getMethod() == 'POST') {
@@ -109,24 +103,39 @@ $app->map(['GET', 'POST'], '/edit/{q}', function (Request $request, Response $re
           $title = $args['title'];
           $entry = $args['entry'] ;
           $id = $args['q'];
+
+/* If the form fields aren't empty then go ahead and call to the editData
+method which will update the database  */
           if(!empty($args['title']) && !empty($args['entry'])) {
            $this->data->editData($title, $entry, $id);
 
-          }
-        }
+
+//After editing the form redirect to the homepage
+      return $response->withStatus(302)->withHeader('Location' , '/');
+
+/*if any of the fields are left blank then set the value of $args['error']
+so that it displays on the page  */
+}         elseif(empty($args['title']) || empty($args['entry'])) {
+
+
+               $args['error'] =
+                '<span class="error">Fields can not be left blank</span>';
+
+                   }
+
+    }
 
     return $this->renderer->render($response, 'edit.spark', $args);
 
 });
 
+/*******************   HOME PAGE  ***********************************/
 $app->get('/', function (Request $request, Response $response, array $args) {
 
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
-    $this->logger->info("Amber was here '/' route");
-
 
 
     return $this->renderer->render($response, 'index.spark', $args);
@@ -146,7 +155,6 @@ $app->get('/pop', function (Request $request, Response $response, array $args) {
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
-    $this->logger->info("Amber was here '/' route");
 
 
 
