@@ -113,7 +113,7 @@ p {
 	line-height: 1.8em;
 }
 p a {
-	border-bottom: 2px solid #c1c1c1;
+	border-bottom: 2px solid #666666;
 	padding: 0;
 }
 a.link {
@@ -168,7 +168,7 @@ a.link {
 	color: #000080	;
 }
 .entry-list time {
-	color: #478476;
+	color: #666666;
 }
 .entry-list.single {
 	padding-bottom: 30px;
@@ -210,7 +210,7 @@ a.link {
 }
 .comment time {
 	display: block;
-	color: #478476;
+	color: #666666;
 	font-size: 14px;
 	margin: 3px 0 20px 0;
 }
