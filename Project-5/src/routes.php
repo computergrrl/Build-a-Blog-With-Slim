@@ -13,13 +13,16 @@ $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $
     $args['data'] = $this->data;
     $args['comments'] = $this->comments;
     $args['blog'] = $this->data->getData();
+    $q = $args['q'];
+    $args['details'] = $this->data->displayDetails($q);
+    $args['getComments'] = $this->comments->getComments($q);
 
 
     if($request->getMethod() == 'POST') {
 
     $args = array_merge($args, $request->getParsedBody());
 
-      $id = $args['q'];
+
       $name = $args['name'];
 
       //if no name is entered, then the name "Anonymous" will be used
@@ -32,7 +35,7 @@ $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $
       /*if form is posted and comment field has data in it then
       call the newComment method */
       if(!empty($comment)) {
-        $this->comments->newComment($id, $name, $comment, $date);
+        $this->comments->newComment($q, $name, $comment, $date);
       }
   }
 
@@ -48,6 +51,7 @@ $app->map(['GET', 'POST'], '/new', function (Request $request, Response $respons
 
     $args['db'] = $this->db;
     $args['data'] = $this->data;
+
 
 
     if($request->getMethod() == 'POST') {
@@ -93,7 +97,8 @@ $app->map(['GET', 'POST'], '/edit/{q}', function (Request $request, Response $re
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
-
+    $q = $args['q'];
+    $args['details'] = $this->data->displayDetails($q);
 
     if($request->getMethod() == 'POST') {
 
@@ -136,6 +141,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     $args['db'] = $this->db;
     $args['data'] = $this->data;
     $args['blog'] = $this->data->getData();
+    $args['list'] = $this->data->listEntries();
 
 
     return $this->renderer->render($response, 'index.spark', $args);

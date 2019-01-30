@@ -35,7 +35,7 @@
 /*Call the displayDetails method which will get the details for this
 particular blog entry and returns the data as an assoc. array
 of values.  Assign that array to $details variable.*/
-                      $details = $data->displayDetails($q);
+                    
 
 /* Use data from $details array to create html for edit display
 and also to insert the existing data into the form fields */

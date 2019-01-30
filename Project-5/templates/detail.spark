@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+
+?>
 <!DOCTYPE html>
 
 <html>
@@ -30,7 +32,7 @@
 
   /*Call the displayDetails method which returns an assoc. array of
   values.  Assign that array to $details variable.*/
-                $details = $data->displayDetails($q);
+            
 
 
   /* Use keys from $details array to create html for details display */
@@ -57,7 +59,7 @@
 of all the comments associated with this particular blog entry. Then use
 foreach loop to display them all  */
 
-               foreach($comments->getComments($q) as $comment) {
+               foreach($getComments as $comment) {
                 echo '<div class="comment">';
                 echo "<strong>" . $comment['name'] . "</strong>";
                 echo '<time datetime="' .$comment['date'] . '">' .$comment['date'] . "</time>";
