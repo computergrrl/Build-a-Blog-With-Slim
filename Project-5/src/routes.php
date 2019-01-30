@@ -36,6 +36,8 @@ $app->map(['GET', 'POST'], '/detail/{q}', function (Request $request, Response $
       call the newComment method */
       if(!empty($comment)) {
         $this->comments->newComment($q, $name, $comment, $date);
+
+        return $response->withStatus(302)->withHeader('Location' , "/detail/$q");
       }
   }
 
